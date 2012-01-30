@@ -1,0 +1,2 @@
+zms.py allows users to receive personal Zephyr notices as text messages if they are away from Zephyr. A user is considered "away" if she has not sent a Zephyr in the last n minutes (n an integer, set to 3 to start, easily changed). If a user is not considered away, she will receive the Zephyr notice as usual on her Zephyr client. zms.py should be run in the background of a Zephyr client or in a different sreen window. 
+
