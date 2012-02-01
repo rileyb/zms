@@ -24,6 +24,7 @@ USERNAME=your_zephyr_username
 PHONE_NUMBER=########## 
 CARRIER_ADDRESS=carriertext.com
 WAIT_TIME=###
+
 You can find your cell carrier's address on Wikipedia. [2]
 
 [1] http://github.com/ebroder/python-zephyr
