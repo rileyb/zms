@@ -1,2 +1,45 @@
-zms.py allows users to receive personal Zephyr notices as text messages if they are away from Zephyr. A user is considered "away" if she has not sent a Zephyr in the last n minutes (n an integer, set to 3 to start, easily changed). If a user is not considered away, she will receive the Zephyr notice as usual on her Zephyr client. zms.py should be run in the background of a Zephyr client or in a different sreen window. 
+== zms.py == 
 
+zms.py sends you text messages of Zephyr personals if you have been
+inactive on Zephyr.
+
+
+== Requirements and Configuration ==
+
+zms.py requires python-zephyr. [1]
+
+zms.py determines your activity by scanning ~/zlog, so you should
+enable logging to that directory in your zephyr client. Barnowl uses
+that directory by default if you enable logging in ./owl/startup with
+the following two lines:
+    
+set classlogging on
+set logging on
+
+zms.py uses personal information to determine when you are away and to
+text you. This information should be stored in ~/.zms.conf in the
+following format:
+
+USERNAME=your_zephyr_username       
+PHONE_NUMBER=########## 
+CARRIER_ADDRESS=carriertext.com
+
+You can find your cell carrier's address on Wikipedia. [2]
+
+zms.py determines whether or not you are active on Zephyr by
+detecting whether you have sent any Zephyrs in the last WAIT_TIME
+seconds. I set WAIT_TIME=180, but you can change it near the top of
+zms.py.
+
+[1] http://github.com/ebroder/python-zephyr
+[2] http://en.wikipedia.org/wiki/List_of_SMS_gateways
+
+
+== Usage ==
+
+If you have a Zephyr client running in screen, you can just run zms.py
+in another window. If you use Kevin Chen's owl-screen, for
+convenience's sake, you can also run zms.py in the background by
+modifying the ZEPHYR_SCREEN_CLIENT environment variable to include a
+wrapper that runs zms.py before launching the Zephyr
+client. barnowl-zms-wrapper.sh is such a wrapper that calls Barnowl.
