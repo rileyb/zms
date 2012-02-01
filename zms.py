@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import calendar
 from datetime import datetime
 import os
