@@ -8,7 +8,7 @@ import time
 import zephyr
 from zephyr import receive, ZNotice
 
-varDict = {'USERNAME': 'your_user_name', 'PHONE_NUMBER': 'your_number', 'CARRIER_ADDRESS': 'your_carrier_info'}
+varDict = {'USERNAME': 'your_user_name', 'PHONE_NUMBER': 'your_number', 'CARRIER_ADDRESS': 'your_carrier_info', 'WAIT_TIME': '180'}
 
 fh = open(os.path.join(os.environ['HOME'],'.zms.conf'))
 for line in fh.readlines():
@@ -19,8 +19,7 @@ for line in fh.readlines():
 USERNAME = varDict['USERNAME'] # Zephyr username/kerberos name, as a string
 PHONE_NUMBER = varDict['PHONE_NUMBER'] # Number at which to receive texts, as a string
 CARRIER_ADDRESS = varDict['CARRIER_ADDRESS'] # Carrier-specific appendage to texts e-mailed to phone, as a string (e.g. 'egtext.com')
-
-WAIT_TIME = 180 # How many seconds to wait before user is considered "away." Rounded to an integer.
+WAIT_TIME = int(varDict['WAIT_TIME']) # How many seconds to wait before user is considered "away."
 
 def findTime2Unix(zTimeStrng):
     splt = zTimeStrng.split()

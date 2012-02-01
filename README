@@ -16,20 +16,15 @@ the following two lines:
 set classlogging on
 set logging on
 
-zms.py uses personal information to determine when you are away and to
+zms.py uses custom information to determine when you are away and to
 text you. This information should be stored in ~/.zms.conf in the
-following format:
+following format (WAIT_TIME in seconds):
 
 USERNAME=your_zephyr_username       
 PHONE_NUMBER=########## 
 CARRIER_ADDRESS=carriertext.com
-
+WAIT_TIME=###
 You can find your cell carrier's address on Wikipedia. [2]
-
-zms.py determines whether or not you are active on Zephyr by
-detecting whether you have sent any Zephyrs in the last WAIT_TIME
-seconds. I set WAIT_TIME=180, but you can change it near the top of
-zms.py.
 
 [1] http://github.com/ebroder/python-zephyr
 [2] http://en.wikipedia.org/wiki/List_of_SMS_gateways
