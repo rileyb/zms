@@ -9,7 +9,7 @@ noticeobj = 'None'
 
 def getVars():
     varDict = {'PHONE_NUMBER': 'your_number', 'CARRIER_ADDRESS': 'your_carrier_info'}
-    fh = open(os.path.join(os.environ['HOME'],'.zms.conf'))
+    fh = open(os.path.join(os.environ['HOME'],'.zmsconf'))
     for line in fh.readlines():
         for key in varDict.keys():
             if line.startswith(key):

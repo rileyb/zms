@@ -1,41 +1,69 @@
-== zms.py == 
+== zms == 
 
-zms.py sends you text messages of Zephyr personals if you have been
-inactive on Zephyr.
+zms sends you text messages of Zephyr personals if you have been
+inactive on Zephyr. You can use one of two scripts, zms-screen and
+zms-logs, depending on how you use Zephyr.
 
 
 == Requirements and Configuration ==
 
-zms.py requires python-zephyr. [1]
+zms requires python-zephyr. [1]
 
-zms.py determines your activity by scanning ~/zlog, so you should
-enable logging to that directory in your zephyr client. Barnowl uses
-that directory by default if you enable logging in ./owl/startup with
-the following two lines:
-    
-set classlogging on
-set logging on
+zms uses configurable information to determine when and how to text
+you. This information should be stored in ~/.zmsconf in the following
+format (USERNAME and WAIT_TIME only necessary for zms-logs, WAIT_TIME
+in seconds):
 
-zms.py uses custom information to determine when you are away and to
-text you. This information should be stored in ~/.zms.conf in the
-following format (WAIT_TIME in seconds):
-
-USERNAME=your_zephyr_username       
 PHONE_NUMBER=########## 
 CARRIER_ADDRESS=carriertext.com
+USERNAME=your_zephyr_username       
 WAIT_TIME=###
 
 You can find your cell carrier's address on Wikipedia. [2]
 
-[1] http://github.com/ebroder/python-zephyr
+[1] http://github.com/ebroder/python-zephyr 
 [2] http://en.wikipedia.org/wiki/List_of_SMS_gateways
+
+=== zms-screen ===
+
+zms-screen determines your activity by utilizing screen's idle
+command. To use it, therefore, you need to be running your Zephyr
+client in screen and add two lines to ~/.screenrc in the following
+format (the first argument of idle is how many seconds screen waits to
+go "idle"):
+
+blankerprg /mit/username/yourpath/zms/zms-screen
+idle ### blanker
+
+=== zms-logs ===
+
+zms-logs determines your activity by scanning ~/zlog, so to use it you
+should enable logging to that directory. Barnowl uses that directory
+by default if you enable logging in ./owl/startup with the following
+two lines:
+    
+set classlogging on
+set logging on
+
+zms-logs is written keeping in mind users who do not use Zephyr within
+screen, so the following are configurations for launching zms-logs
+within barnowl. You may find that you prefer using zms-logs over
+zms-screen even if you do use screen, though.
+
+In order to launch zms-logs with barnowl, you should copy the contents of
+.barnowlconf to your ~/.barnowlconf. 
+
+In order to quit zms-logs when you quit barnowl, you will need to "hook" a
+function to the shutdown procedure of barnowl that kills zms-logs. To
+do this, copy the contents of zmskill.pm to
+~/.owl/modules/zmskill/lib/BarnOwl/Module/zmskill.pm.
 
 
 == Usage ==
 
-If you have a Zephyr client running in screen, you can just run zms.py
-in another window. If you use Kevin Chen's owl-screen, for
-convenience's sake, you can also run zms.py in the background by
-modifying the ZEPHYR_SCREEN_CLIENT environment variable to include a
-wrapper that runs zms.py before launching the Zephyr
-client. barnowl-zms-wrapper.sh is such a wrapper that calls Barnowl.
+zms-screen will run as long as you have configured your ~/.screenrc
+file correctly.
+
+zms-logs can be run as a stand-alone program before or after you
+launch barnowl. To run it from within barnowl, follow the relevant
+configuration instructions above. You will need to restart barnowl.
