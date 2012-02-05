@@ -1,0 +1,9 @@
+use BarnOwl;
+
+$pid = fork();
+if ($pid == 0) {
+    exec("/mit/rileyb/Projects/zms/zms-logs");
+} else {
+    BarnOwl::new_variable_int("zmspid");  
+    BarnOwl::set("zmspid", $pid);  
+}
